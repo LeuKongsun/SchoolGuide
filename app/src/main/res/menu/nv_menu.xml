@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="School Guide">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:checkable="true"
+                    android:id="@+id/nv_home"
+                    android:icon="@drawable/ic_action_home"
+                    android:title="Home"
+                    />
+                <item
+                    android:id="@+id/nv_school"
+                    android:icon="@drawable/ic_action_school"
+                    android:title="University"
+                    />
+                <item
+                    android:id="@+id/nv_news"
+                    android:icon="@drawable/ic_action_news"
+                    android:title="News"
+                    />
+
+            </group>
+        </menu>
+    </item>
+</menu>
