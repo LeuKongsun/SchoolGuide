@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
-    <TextView
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="What University Are you\n looking for?"
-        android:textSize="50sp"
-        android:textColor="@color/colorPrimary"
-        android:fontFamily="cursive"
-        android:textStyle="bold"/>
-
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:background="@color/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="fixed"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:onClick="loadOption"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.kongsun.schoolguide;
+package com.example.kongsun.schoolguide.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.kongsun.schoolguide.R;
 
 /**
  * Created by kongsun on 8/31/17.

@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:background="@drawable/nav_menu_header"
     android:layout_height="160dp"
-    tools:context="com.example.kongsun.schoolguide.MainActivity">
+    tools:context="com.example.kongsun.schoolguide.activity.MainActivity">
     <ImageView
         android:id="@+id/img_profile"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/ic_profile"/>
+        android:src="@drawable/app_logo"/>
     <TextView
         android:id="@+id/txt_Username"
         android:layout_below="@id/img_profile"
@@ -29,7 +29,7 @@
         android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SchoolGuide@gmail.com"
+        android:text="BE THE RIGHT DECISION"
         android:textColor="#fff"
         android:textSize="14sp"/>
 
