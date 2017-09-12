@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 onHomeClick();
                 break;
             case R.id.nv_school:
-                Toast.makeText(getApplication(),"PublicUniversity",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(),"University",Toast.LENGTH_SHORT).show();
                 getSupportActionBar();
-                setTitle("PublicUniversity");
+                setTitle("University");
                 onSchoolClick();
                 break;
             case R.id.nv_news:

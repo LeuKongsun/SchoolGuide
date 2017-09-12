@@ -10,7 +10,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.example.kongsun.schoolguide.R;
 import com.example.kongsun.schoolguide.singleton.MySingleTon;
 
-public class PUBDescriptionActivity extends AppCompatActivity {
+public class DescriptionActivity extends AppCompatActivity {
 
     TextView kh_Name,en_Name,desc;
     NetworkImageView logoUrl,photoUrl;
@@ -18,7 +18,7 @@ public class PUBDescriptionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pubdescription);
+        setContentView(R.layout.activity_description);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.desc_toolbar);
         setSupportActionBar(toolbar);

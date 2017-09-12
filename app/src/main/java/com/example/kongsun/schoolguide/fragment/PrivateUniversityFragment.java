@@ -16,9 +16,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.kongsun.schoolguide.OnRecyclerViewItemClickListener;
 import com.example.kongsun.schoolguide.R;
-import com.example.kongsun.schoolguide.accessor.PrivateUniversity;
-import com.example.kongsun.schoolguide.activity.RRIDescriptionActivity;
-import com.example.kongsun.schoolguide.adapter.PrivateUniversityAdapter;
+import com.example.kongsun.schoolguide.accessor.University;
+import com.example.kongsun.schoolguide.activity.DescriptionActivity;
+import com.example.kongsun.schoolguide.adapter.UniversityAdapter;
 import com.example.kongsun.schoolguide.singleton.MySingleTon;
 
 import org.json.JSONArray;
@@ -34,9 +34,9 @@ import java.util.List;
 
 public class PrivateUniversityFragment extends Fragment implements OnRecyclerViewItemClickListener,SwipeRefreshLayout.OnRefreshListener{
     private RecyclerView mRecyclerView;
-    private PrivateUniversityAdapter mAdapter;
+    private UniversityAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private List<PrivateUniversity> privateUniversities = new ArrayList<>();
+    private List<University> publicUniversities = new ArrayList<>();
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
@@ -49,7 +49,7 @@ public class PrivateUniversityFragment extends Fragment implements OnRecyclerVie
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new PrivateUniversityAdapter(privateUniversities,getContext());
+        mAdapter = new UniversityAdapter(publicUniversities,getContext());
         mAdapter.setOnRecyclerViewItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -72,7 +72,7 @@ public class PrivateUniversityFragment extends Fragment implements OnRecyclerVie
             public void onResponse(JSONArray response) {
                 showLoading(false); //បើមានទិន្នន័យ មិនចាំបាច់ Load Data
                 try{
-                    List<PrivateUniversity> privateUniversities = new ArrayList<>();
+                    List<University> publicUniversities = new ArrayList<>();
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject jsonObject = response.getJSONObject(i);
                         int id = jsonObject.getInt("ID");
@@ -81,10 +81,10 @@ public class PrivateUniversityFragment extends Fragment implements OnRecyclerVie
                         String logoUrl = jsonObject.getString("LogoUrl");
                         String photoUrl = jsonObject.getString("PhotoUrl");
                         String desc = jsonObject.getString("Description");
-                        PrivateUniversity privateUniversity = new PrivateUniversity(id, kh_name, en_name, logoUrl, photoUrl,desc);
-                        privateUniversities.add(privateUniversity);
+                        University university = new University(id, kh_name, en_name, logoUrl, photoUrl,desc);
+                        publicUniversities.add(university);
                     }
-                    mAdapter.setPrivateUniversity(privateUniversities);
+                    mAdapter.setUniversities(publicUniversities);
                 }catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -109,8 +109,8 @@ public class PrivateUniversityFragment extends Fragment implements OnRecyclerVie
 
     @Override
     public void OnRecyclerViewItemClickListener(int position) {
-        PrivateUniversity privateUniversity = mAdapter.getPrivateUniversity(position);
-        Intent intent = new Intent(getActivity(), RRIDescriptionActivity.class);
+        University privateUniversity = mAdapter.getPublicUniversity(position);
+        Intent intent = new Intent(getActivity(), DescriptionActivity.class);
         intent.putExtra("Kh_Name",privateUniversity.getKh_Name());
         intent.putExtra("En_Name",privateUniversity.getEn_Name());
         intent.putExtra("LogoUrl",privateUniversity.getLogoUrl());

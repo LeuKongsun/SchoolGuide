@@ -17,10 +17,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.kongsun.schoolguide.OnRecyclerViewItemClickListener;
 import com.example.kongsun.schoolguide.R;
-import com.example.kongsun.schoolguide.accessor.PublicUniversity;
-import com.example.kongsun.schoolguide.activity.PUBDescriptionActivity;
-import com.example.kongsun.schoolguide.activity.RRIDescriptionActivity;
-import com.example.kongsun.schoolguide.adapter.PublicUniversityAdapter;
+import com.example.kongsun.schoolguide.accessor.University;
+import com.example.kongsun.schoolguide.activity.DescriptionActivity;
+import com.example.kongsun.schoolguide.adapter.UniversityAdapter;
 import com.example.kongsun.schoolguide.singleton.MySingleTon;
 
 import org.json.JSONArray;
@@ -36,9 +35,9 @@ import java.util.List;
  */
 public class PublicUniversityFragment extends Fragment implements OnRecyclerViewItemClickListener,SwipeRefreshLayout.OnRefreshListener{
     private RecyclerView mRecyclerView;
-    private PublicUniversityAdapter mAdapter;
+    private UniversityAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private List<PublicUniversity> universities = new ArrayList<>();
+    private List<University> universities = new ArrayList<>();
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
@@ -51,7 +50,7 @@ public class PublicUniversityFragment extends Fragment implements OnRecyclerView
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new PublicUniversityAdapter(universities,getContext());
+        mAdapter = new UniversityAdapter(universities,getContext());
         mAdapter.setOnRecyclerViewItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -74,7 +73,7 @@ public class PublicUniversityFragment extends Fragment implements OnRecyclerView
             public void onResponse(JSONArray response) {
                 showLoading(false); //បើមានទិន្នន័យ មិនចាំបាច់ Load Data
                 try{
-                    List<PublicUniversity> universities = new ArrayList<>();
+                    List<University> universities = new ArrayList<>();
                 for (int i = 0; i < response.length(); i++) {
                         JSONObject jsonObject = response.getJSONObject(i);
                         int id = jsonObject.getInt("ID");
@@ -83,8 +82,8 @@ public class PublicUniversityFragment extends Fragment implements OnRecyclerView
                         String logoUrl = jsonObject.getString("LogoUrl");
                         String photoUrl = jsonObject.getString("PhotoUrl");
                         String desc = jsonObject.getString("Description");
-                        PublicUniversity publicUniversity = new PublicUniversity(id, kh_name, en_name, logoUrl, photoUrl,desc);
-                        universities.add(publicUniversity);
+                        University university = new University(id, kh_name, en_name, logoUrl, photoUrl,desc);
+                        universities.add(university);
                     }
                     mAdapter.setUniversities(universities);
                     }catch (JSONException e) {
@@ -111,13 +110,13 @@ public class PublicUniversityFragment extends Fragment implements OnRecyclerView
 
     @Override
     public void OnRecyclerViewItemClickListener(int position) {
-        PublicUniversity publicUniversity = mAdapter.getPublicUniversity(position);
-        Intent intent = new Intent(getActivity(),RRIDescriptionActivity.class);
-        intent.putExtra("Kh_Name",publicUniversity.getKh_Name());
-        intent.putExtra("En_Name",publicUniversity.getEn_Name());
-        intent.putExtra("LogoUrl",publicUniversity.getLogoUrl());
-        intent.putExtra("PhotoUrl",publicUniversity.getPhotoUrl());
-        intent.putExtra("Description",publicUniversity.getDesc());
+        University university = mAdapter.getPublicUniversity(position);
+        Intent intent = new Intent(getActivity(),DescriptionActivity.class);
+        intent.putExtra("Kh_Name", university.getKh_Name());
+        intent.putExtra("En_Name", university.getEn_Name());
+        intent.putExtra("LogoUrl", university.getLogoUrl());
+        intent.putExtra("PhotoUrl", university.getPhotoUrl());
+        intent.putExtra("Description", university.getDesc());
         startActivity(intent);
     }
 }

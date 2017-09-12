@@ -2,7 +2,6 @@ package com.example.kongsun.schoolguide.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,32 +10,31 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.kongsun.schoolguide.OnRecyclerViewItemClickListener;
 import com.example.kongsun.schoolguide.R;
-import com.example.kongsun.schoolguide.accessor.PrivateUniversity;
-import com.example.kongsun.schoolguide.accessor.PublicUniversity;
+import com.example.kongsun.schoolguide.accessor.University;
 import com.example.kongsun.schoolguide.singleton.MySingleTon;
 
 import java.util.List;
 
 /**
- * Created by kongsun on 9/11/17.
+ * Created by kongsun on 9/7/17.
  */
 
-public class PrivateUniversityAdapter extends RecyclerView.Adapter<PrivateUniversityAdapter.ViewHolder> {
+public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.ViewHolder> {
     private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
-    private List<PrivateUniversity> privateUniversities;
+    private List<University> publicUniversities;
     private Context context;
-    public PrivateUniversityAdapter(List<PrivateUniversity> privateUniversities, Context context) {
-        this.privateUniversities = privateUniversities;
+    public UniversityAdapter(List<University> publicUniversities, Context context) {
+        this.publicUniversities = publicUniversities;
         this.context = context;
-    }
-
-    public void setPrivateUniversity(List<PrivateUniversity> privateUniversity) {
-        this.privateUniversities = privateUniversity;
-        notifyDataSetChanged();
     }
 
     public void setOnRecyclerViewItemClickListener(OnRecyclerViewItemClickListener onRecyclerViewItemClickListener) {
         this.onRecyclerViewItemClickListener = onRecyclerViewItemClickListener;
+    }
+
+    public void setUniversities(List<University> publicUniversities) {
+        this.publicUniversities = publicUniversities;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -48,21 +46,21 @@ public class PrivateUniversityAdapter extends RecyclerView.Adapter<PrivateUniver
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        PrivateUniversity privateUniversity = privateUniversities.get(position);
-        holder.kh_name.setText(privateUniversity.getKh_Name());
-        holder.en_name.setText(privateUniversity.getEn_Name());
-        holder.logo.setImageUrl(privateUniversity.getLogoUrl(), MySingleTon.getInstance(context).getImageLoader());
-        holder.photoBackground.setImageUrl(privateUniversity.getPhotoUrl(), MySingleTon.getInstance(context).getImageLoader());
+        University university = publicUniversities.get(position);
+        holder.kh_name.setText(university.getKh_Name());
+        holder.en_name.setText(university.getEn_Name());
+        holder.logo.setImageUrl(university.getLogoUrl(), MySingleTon.getInstance(context).getImageLoader());
+        holder.photoBackground.setImageUrl(university.getPhotoUrl(), MySingleTon.getInstance(context).getImageLoader());
 
     }
 
     @Override
     public int getItemCount() {
-        return privateUniversities.size();
+        return publicUniversities.size();
     }
 
-    public PrivateUniversity getPrivateUniversity(int position) {
-        return privateUniversities.get(position);
+    public University getPublicUniversity(int position) {
+        return publicUniversities.get(position);
     }
 
 
@@ -80,15 +78,14 @@ public class PrivateUniversityAdapter extends RecyclerView.Adapter<PrivateUniver
             en_name = (TextView) itemView.findViewById(R.id.txt_enName);
             logo = (NetworkImageView) itemView.findViewById(R.id.img_logo);
             photoBackground = (NetworkImageView) itemView.findViewById(R.id.img_background);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("schoolguide", "on view holder click");
                     onRecyclerViewItemClickListener.OnRecyclerViewItemClickListener(getAdapterPosition());
                 }
             });
 
         }
     }
+
 }

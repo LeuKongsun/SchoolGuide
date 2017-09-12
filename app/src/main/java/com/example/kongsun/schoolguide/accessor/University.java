@@ -4,7 +4,7 @@ package com.example.kongsun.schoolguide.accessor;
  * Created by kongsun on 9/7/17.
  */
 
-public class PublicUniversity {
+public class University {
     public int id;
     public String kh_Name;
     public String en_Name;
@@ -60,7 +60,7 @@ public class PublicUniversity {
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
-    public PublicUniversity(int id, String kh_Name, String en_Name, String logoUrl, String photoUrl,String desc){
+    public University(int id, String kh_Name, String en_Name, String logoUrl, String photoUrl, String desc){
         this.id = id;
         this.kh_Name = kh_Name;
         this.en_Name = en_Name;
